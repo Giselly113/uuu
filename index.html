@@ -1,0 +1,328 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mix Mania</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Geral */
+        body {
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #40106d;
+            color: #fff;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: calc(100% - 46px);
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 2px 4px rgb(255, 253, 253);
+        }
+
+        .search-bar button {
+            background: url('https://img.icons8.com/material-outlined/24/search.png') no-repeat center center;
+            background-size: contain;
+            border: none;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            border-radius: 50%;
+            margin-left: -46px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cart {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .cart-icon {
+            width: 24px;
+            height: 24px;
+            background: url('https://img.icons8.com/material-outlined/24/shopping-cart.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff0000;
+            color: #fff;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            max-height: 300px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .slider img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product .sub-price {
+            text-decoration: line-through;
+            color: #ad0404;
+        }
+
+        .product .price {
+            font-weight: 700;
+            color: #000000;
+            margin: 5px 0;
+        }
+
+        .price-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #52125a;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .price-button:hover {
+            background-color: #000000;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer .social-links a {
+            margin: 0 10px;
+            color: #fff;
+        }
+
+        .newsletter {
+            background-color: #5e05b1;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .newsletter input[type="email"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: calc(100% - 120px);
+            margin-right: 10px;
+        }
+
+        .newsletter input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #3d03a1;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Consultas de Mídia para Dispositivos Móveis */
+        @media (max-width: 768px) {
+            .search-bar input {
+                width: calc(100% - 46px);
+            }
+
+            .newsletter input[type="email"] {
+                width: calc(100% - 120px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-bar {
+                margin-top: 10px;
+            }
+
+            .newsletter input[type="email"] {
+                width: calc(100% - 120px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Mix Mania</h1>
+    <div class="nav-menu">
+        <a href="#">Home</a>
+        <a href="#">Produtos</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar produtos...">
+        <button type="button"></button>
+    </div>
+    <div class="cart">
+        <div class="cart-icon"></div>
+        <div class="cart-counter">3</div>
+    </div>
+</header>
+
+<div class="slider">
+    <img src="https://export-download.canva.com/1BI24/DAGQga1BI24/9/0/0001-9029031713552046938.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHKNGJLC2J7OGJ6Q%2F20240911%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240911T233426Z&X-Amz-Expires=13042&X-Amz-Signature=88a0686b756d32a79610f9c361c8e9531fa8278fe1d73b45de7f948be59a67a0&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%2A%3DUTF-8%27%27oertas.jpg&response-expires=Thu%2C%2012%20Sep%202024%2003%3A11%3A48%20GMT" alt="Promoção Atual">
+</div>
+
+<div class="product-grid" id="product-grid">
+    <!-- Lista de Produtos -->
+    <div class="product">
+        <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lwcytck2ckuq71.webp" alt="Sandália Baby">
+        <h3>Sandália papete Menina Mini Baby</h3>
+        <div class="price">R$ 39,90</div>
+        <a href="https://pag.ae/7-SandaliaBaby" class="price-button">Comprar</a>
+    </div>
+    <div class="product">
+        <img src="https://via.placeholder.com/400x400?text=Tênis+Infantil" alt="Tênis Infantil">
+        <h3>Tênis Infantil Esportivo</h3>
+        <div class="price">R$ 99,90</div>
+        <a href="https://pag.ae/7-TenisInfantil" class="price-button">Comprar</a>
+    </div>
+    <div class="product">
+        <img src="https://via.placeholder.com/400x400?text=Papete+Menina" alt="Papete Menina">
+        <h3>Papete Menina Mini Blogueirinha</h3>
+        <div class="price">R$ 89,90</div>
+        <a href="https://pag.ae/7-PapeteMenina" class="price-button">Comprar</a>
+    </div>
+    <div class="product">
+        <img src="https://via.placeholder.com/400x400?text=Chinelo+Unissex" alt="Chinelo Unissex">
+        <h3>Chinelo Unissex Kids</h3>
+        <div class="price">R$ 49,90</div>
+        <a href="https://pag.ae/7-ChineloKids" class="price-button">Comprar</a>
+    </div>
+</div>
+
+<div class="newsletter">
+    <h2>Receba Ofertas Exclusivas!</h2>
+    <form action="#" method="post">
+        <input type="email" placeholder="Seu e-mail" required>
+        <input type="submit" value="Inscreva-se">
+    </form>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Mix Mania - Todos os direitos reservados.</p>
+    <div class="social-links">
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </div>
+    <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+</footer>
+
+</body>
+</html>
